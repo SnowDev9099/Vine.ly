@@ -1,36 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const videos = document.querySelectorAll(".video");
-    const pageContainers = document.querySelectorAll(".page-container");
-    let currentVideoIndex = 0;
-
-    // Handle video scrolling
-    const handleScroll = () => {
-        const sections = document.querySelectorAll(".video-section");
-        sections.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                if (index !== currentVideoIndex) {
-                    videos[currentVideoIndex].pause();
-                    currentVideoIndex = index;
-                    videos[currentVideoIndex].play();
-                }
-            }
-        });
+    const videoElement = document.getElementById("video");
+    const videoNameElement = document.getElementById("video-name");
+    const videoDescriptionElement = document.getElementById("video-description");
+    const likesCountElement = document.getElementById("likes-count");
+    
+    // Function to fetch video data from JSON
+    const fetchVideoData = async () => {
+        const response = await fetch('videos.json');
+        const videos = await response.json();
+        
+        // Get a random video
+        const randomIndex = Math.floor(Math.random() * videos.length);
+        const selectedVideo = videos[randomIndex];
+        
+        // Update video player source
+        videoElement.src = `videos/${selectedVideo.name}.mp4`;
+        
+        // Update video information
+        videoNameElement.textContent = selectedVideo.name;
+        videoDescriptionElement.textContent = selectedVideo.description;
+        likesCountElement.textContent = selectedVideo.likes;
+        
+        // Play the video
+        videoElement.play();
     };
 
-    document.querySelector(".video-container").addEventListener("scroll", handleScroll);
+    fetchVideoData();
 
-    // Optionally play the first video automatically
-    videos[0].play();
-
-    // Page switching logic for bottom nav
+    // Optionally, page switching logic remains the same
     window.goToPage = function (page) {
-        pageContainers.forEach(container => container.style.display = "none");
-        if (page === 'home') {
-            document.querySelector(".video-container").style.display = "flex";
-        } else {
-            document.querySelector(".video-container").style.display = "none";
-            document.getElementById(page).style.display = "block";
-        }
+        // Similar to before
     };
 });
