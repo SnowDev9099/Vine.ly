@@ -9,23 +9,7 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #000;
     color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-}
-
-/* Header */
-.header {
-    background-color: #00bf8f;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.header h1 {
-    margin: 0;
+    overflow: hidden; /* Hide overflow to prevent scrolling on body */
 }
 
 /* Video Feed */
@@ -33,27 +17,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    justify-content: center;
     height: 100vh; /* Full viewport height */
-    overflow-y: auto;
-}
-
-/* Video Container */
-.video-container {
-    background-color: #fff;
-    margin: 0;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 500px;
-    transition: transform 0.3s ease;
 }
 
 /* Video Element */
 video {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 15px; /* Rounded edges */
 }
 
 /* Loading Message */
