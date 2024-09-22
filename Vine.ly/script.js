@@ -1,34 +1,88 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const videoElement = document.getElementById("video");
-    const videoNameElement = document.getElementById("video-name");
-    const videoDescriptionElement = document.getElementById("video-description");
-    const likesCountElement = document.getElementById("likes-count");
-    
-    // Function to fetch video data from JSON
-    const fetchVideoData = async () => {
-        const response = await fetch('videos.json');
-        const videos = await response.json();
-        
-        // Get a random video
-        const randomIndex = Math.floor(Math.random() * videos.length);
-        const selectedVideo = videos[randomIndex];
-        
-        // Update video player source
-        videoElement.src = `videos/${selectedVideo.name}.mp4`;
-        
-        // Update video information
-        videoNameElement.textContent = selectedVideo.name;
-        videoDescriptionElement.textContent = selectedVideo.description;
-        likesCountElement.textContent = selectedVideo.likes;
-        
-        // Play the video
-        videoElement.play();
-    };
+document.addEventListener('DOMContentLoaded', () => {
+    const videoFeed = document.getElementById('videoFeed');
+    const loadingMessage = document.getElementById('loading');
+    const videoFolder = './videos/';  // Folder where your videos are stored
+    const videoList = ['vine1.mp4', 'vine2.mp4', 'vine3.mp4', 'vine4.mp4'];  // Example video filenames
 
-    fetchVideoData();
+    let videosLoaded = 0;
+    const videosPerLoad = 3;  // Number of videos to load per scroll
+    const maxVideos = 20;     // Maximum number of videos to load
 
-    // Optionally, page switching logic remains the same
-    window.goToPage = function (page) {
-        // Similar to before
-    };
+    // Function to randomly select a video
+    function getRandomVideo() {
+        const randomIndex = Math.floor(Math.random() * videoList.length);
+        return videoFolder + videoList[randomIndex];
+    }
+
+    // Function to add a new video to the feed
+    function addVideo() {
+        const videoContainer = document.createElement('div');
+        videoContainer.classList.add('video-container');
+
+        // Create the video element
+        const videoElement = document.createElement('video');
+        videoElement.src = getRandomVideo();
+        videoElement.setAttribute('loop', '');
+        videoElement.setAttribute('autoplay', '');
+        videoElement.setAttribute('muted', '');
+        videoElement.controls = true;
+
+        // Video info (title + icons)
+        const videoInfo = document.createElement('div');
+        videoInfo.classList.add('video-info');
+
+        const videoTitle = document.createElement('p');
+        videoTitle.classList.add('video-title');
+        videoTitle.textContent = `Vine Title #${videosLoaded + 1}`;
+
+        // Icons (like, share, etc.)
+        const iconsContainer = document.createElement('div');
+        iconsContainer.classList.add('icons');
+
+        const likeIcon = createIcon('./icons/like.png');
+        const shareIcon = createIcon('./icons/share.png');
+        iconsContainer.appendChild(likeIcon);
+        iconsContainer.appendChild(shareIcon);
+
+        videoInfo.appendChild(videoTitle);
+        videoInfo.appendChild(iconsContainer);
+
+        videoContainer.appendChild(videoElement);
+        videoContainer.appendChild(videoInfo);
+
+        videoFeed.appendChild(videoContainer);
+        videosLoaded++;
+    }
+
+    // Function to create an icon
+    function createIcon(iconSrc) {
+        const icon = document.createElement('div');
+        icon.classList.add('icon');
+        const img = document.createElement('img');
+        img.src = iconSrc;
+        icon.appendChild(img);
+        return icon;
+    }
+
+    // Load initial videos
+    for (let i = 0; i < videosPerLoad; i++) {
+        addVideo();
+    }
+
+    // Infinite Scroll Logic
+    window.addEventListener('scroll', () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+            if (videosLoaded < maxVideos) {
+                loadingMessage.style.display = 'block';
+                setTimeout(() => {
+                    for (let i = 0; i < videosPerLoad; i++) {
+                        addVideo();
+                    }
+                    loadingMessage.style.display = 'none';
+                }, 1000); // Simulate loading time
+            } else {
+                loadingMessage.textContent = 'No more videos to load.';
+            }
+        }
+    });
 });
