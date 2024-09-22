@@ -4,50 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vine Remake</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
-    <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="video-container">
-        <div class="video-section">
-            <video id="video" class="video-js vjs-default-skin" controls preload="auto">
-                Your browser does not support HTML5 video.
-            </video>
-            <div class="sidebar">
-                <button class="like-btn"><img src="icons/like.svg" alt="Like"></button>
-                <button class="share-btn"><img src="icons/share.svg" alt="Share"></button>
-                <button class="play-btn"><img src="icons/play.svg" alt="Play"></button>
-            </div>
-        </div>
-        <div class="video-info">
-            <h2 id="video-name"></h2>
-            <p id="video-description"></p>
-            <p id="video-likes">Likes: <span id="likes-count"></span></p>
-        </div>
+    <div class="header">
+        <h1>Vine Remake</h1>
     </div>
 
-    <!-- Bottom Navigation Bar -->
-    <div class="bottom-nav">
-        <button class="nav-btn" onclick="goToPage('home')"><img src="icons/home.svg" alt="Home"></button>
-        <button class="nav-btn" onclick="goToPage('search')"><img src="icons/search.svg" alt="Search"></button>
-        <button class="nav-btn" onclick="goToPage('inbox')"><img src="icons/inbox.svg" alt="Inbox"></button>
-        <button class="nav-btn" onclick="goToPage('account')"><img src="icons/account.svg" alt="Account"></button>
+    <div class="video-feed" id="videoFeed">
+        <!-- Videos will be injected here by JavaScript -->
     </div>
 
-    <div class="page-container" id="search" style="display: none;">
-        <h2>Search Page</h2>
-    </div>
-
-    <div class="page-container" id="inbox" style="display: none;">
-        <h2>Inbox Page</h2>
-    </div>
-
-    <div class="page-container" id="account" style="display: none;">
-        <h2>Account Page</h2>
-    </div>
+    <div id="loading" style="display: none;">Loading more videos...</div>
 
     <script src="script.js"></script>
 </body>
