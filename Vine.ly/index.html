@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vine Remake</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Load Font Awesome -->
 </head>
 <body>
 
@@ -13,30 +14,52 @@
         <div class="video-section">
             <video src="videos/video1.mp4" class="video" controls></video>
             <div class="sidebar">
-                <button class="like-btn">👍 Like</button>
-                <button class="share-btn">🔗 Share</button>
-                <button class="play-btn">▶ Play</button>
+                <button class="like-btn"><i class="fas fa-heart"></i></button>
+                <button class="share-btn"><i class="fas fa-share"></i></button>
+                <button class="play-btn"><i class="fas fa-play"></i></button>
             </div>
         </div>
 
         <div class="video-section">
             <video src="videos/video2.mp4" class="video" controls></video>
             <div class="sidebar">
-                <button class="like-btn">👍 Like</button>
-                <button class="share-btn">🔗 Share</button>
-                <button class="play-btn">▶ Play</button>
+                <button class="like-btn"><i class="fas fa-heart"></i></button>
+                <button class="share-btn"><i class="fas fa-share"></i></button>
+                <button class="play-btn"><i class="fas fa-play"></i></button>
             </div>
         </div>
 
         <div class="video-section">
             <video src="videos/video3.mp4" class="video" controls></video>
             <div class="sidebar">
-                <button class="like-btn">👍 Like</button>
-                <button class="share-btn">🔗 Share</button>
-                <button class="play-btn">▶ Play</button>
+                <button class="like-btn"><i class="fas fa-heart"></i></button>
+                <button class="share-btn"><i class="fas fa-share"></i></button>
+                <button class="play-btn"><i class="fas fa-play"></i></button>
             </div>
         </div>
+    </div>
 
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <button class="nav-btn" onclick="goToPage('home')"><i class="fas fa-home"></i></button>
+        <button class="nav-btn" onclick="goToPage('search')"><i class="fas fa-search"></i></button>
+        <button class="nav-btn" onclick="goToPage('inbox')"><i class="fas fa-inbox"></i></button>
+        <button class="nav-btn" onclick="goToPage('account')"><i class="fas fa-user"></i></button>
+    </div>
+
+    <div class="page-container" id="search" style="display: none;"> <!-- Hidden by default -->
+        <h2>Search Page</h2>
+        <!-- Search functionality goes here -->
+    </div>
+
+    <div class="page-container" id="inbox" style="display: none;"> <!-- Hidden by default -->
+        <h2>Inbox Page</h2>
+        <!-- Inbox functionality goes here -->
+    </div>
+
+    <div class="page-container" id="account" style="display: none;"> <!-- Hidden by default -->
+        <h2>Account Page</h2>
+        <!-- Account details go here -->
     </div>
 
     <script src="script.js"></script>
