@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const videoFeed = document.getElementById('videoFeed');
     const loadingMessage = document.getElementById('loading');
-    const videoFolder = './videos/';  // Folder where your videos are stored
-    const videoList = ['vine1.mp4', 'vine2.mp4', 'vine3.mp4', 'vine4.mp4'];  // Example video filenames
+    const videoFolder = './videos/';
+    const videoList = ['vine1.mp4', 'vine2.mp4', 'vine3.mp4', 'vine4.mp4'];
 
     let videosLoaded = 0;
-    const videosPerLoad = 3;  // Number of videos to load per scroll
-    const maxVideos = 20;     // Maximum number of videos to load
+    const videosPerLoad = 3;
+    const maxVideos = 20;
 
     // Function to randomly select a video
     function getRandomVideo() {
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoContainer = document.createElement('div');
         videoContainer.classList.add('video-container');
 
-        // Create the video element
         const videoElement = document.createElement('video');
         videoElement.src = getRandomVideo();
         videoElement.setAttribute('loop', '');
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         videoElement.setAttribute('muted', '');
         videoElement.controls = true;
 
-        // Video info (title + icons)
         const videoInfo = document.createElement('div');
         videoInfo.classList.add('video-info');
 
@@ -35,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         videoTitle.classList.add('video-title');
         videoTitle.textContent = `Vine Title #${videosLoaded + 1}`;
 
-        // Icons (like, share, etc.)
         const iconsContainer = document.createElement('div');
         iconsContainer.classList.add('icons');
 
